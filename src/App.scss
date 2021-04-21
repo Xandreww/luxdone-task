@@ -13,4 +13,9 @@ body {
 
 .root-container {
   padding: 0 !important;
+  max-width: inherit !important;
+}
+
+.MuiToolbar-gutters {
+  padding: 0 !important;
 }

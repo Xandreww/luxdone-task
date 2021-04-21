@@ -1,14 +1,37 @@
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import "./Navbar.scss";
+import { AppBar, Container, Toolbar } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import SearchIcon from "@material-ui/icons/Search";
+import giphy from "../../../assets/giphy.png";
 import React from "react";
+import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
   return (
     <AppBar position="static">
-      <Toolbar variant="dense">
-        <h6 className="nav-item">Test 2</h6>
-        <h6 className="nav-item">Asdasd</h6>
-      </Toolbar>
+      <Container>
+        <Toolbar className={styles.navbar} variant="dense">
+          <div className={styles.left}>
+            <Link className={styles.navItem} to="/">
+              <HomeIcon />
+              Home
+            </Link>
+            <Link className={styles.navItem} to="/trending">
+              <TrendingUpIcon />
+              Trending
+            </Link>
+            <Link className={styles.navItem} to="search">
+              <SearchIcon />
+              Search
+            </Link>
+          </div>
+          <div className={styles.right}>
+            <span>Powered by: </span>
+            <img src={giphy} alt="Giphy's Logo" />
+          </div>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };
