@@ -8,7 +8,9 @@ body {
 
 .container {
   background-color: #cfe8fc;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
+  background: aliceblue;
 }
 
 .root-container {
@@ -18,4 +20,16 @@ body {
 
 .MuiToolbar-gutters {
   padding: 0 !important;
+}
+
+.gifs {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gif {
+  padding: 0 2px;
 }
