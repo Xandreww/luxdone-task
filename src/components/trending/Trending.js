@@ -4,12 +4,12 @@ import { getTrendingGifs } from "../../redux/actions/gifsActions";
 import PropTypes from "prop-types";
 import Spinner from "../layout/spinner/Spinner";
 
-const Trending = ({ getTrendingGifs, gifs: { gifs, loading, error } }) => {
+const Trending = ({ getTrendingGifs, gifs: { trendingGifs, loading, error } }) => {
   useEffect(() => {
-    if (!gifs || (gifs && gifs.data.length === 0)) {
+    if (!trendingGifs || (trendingGifs && trendingGifs.data.length === 0)) {
       getTrendingGifs();
     }
-  }, [getTrendingGifs, gifs]);
+  }, [getTrendingGifs, trendingGifs]);
 
   return (
     <div className="gifs">
@@ -18,12 +18,12 @@ const Trending = ({ getTrendingGifs, gifs: { gifs, loading, error } }) => {
       {!loading && !error && (
         <>
           <h1>Trending</h1>
-          {gifs.data.map((gif) => (
+          {trendingGifs.data.map((gif) => (
             <div key={gif.id} className="gif">
               <img src={gif.images.fixed_height.url} alt={gif.title} />
             </div>
           ))}
-          <button onClick={() => getTrendingGifs()}>Gimme another joke!</button>
+          <button onClick={() => getTrendingGifs()}>Refresh trending GIFs</button>
         </>
       )}
     </div>

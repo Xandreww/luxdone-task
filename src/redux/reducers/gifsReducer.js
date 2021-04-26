@@ -1,7 +1,7 @@
-import { GET_TRENDING_GIFS, GIFS_ERROR } from "../actions/types";
+import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS } from "../actions/types";
 
 const initialState = {
-  loading: true,
+  loading: false,
   joke: null,
   error: "",
 };
@@ -11,7 +11,9 @@ export default function gifs(state = initialState, action) {
 
   switch (type) {
     case GET_TRENDING_GIFS:
-      return { ...state, gifs: payload, loading: false };
+      return { ...state, trendingGifs: payload, loading: false };
+    case SEARCH_GIFS:
+      return { ...state, foundGifs: payload, loading: false };
     case GIFS_ERROR:
       return { ...state, error: payload, loading: false };
     default:
