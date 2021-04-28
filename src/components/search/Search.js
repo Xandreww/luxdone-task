@@ -35,7 +35,6 @@ const Search = ({ searchGifs, gifs: { foundGifs, loading, error } }) => {
       <form noValidate autoComplete="off">
         <TextField id="standard-basic" label="Search for gifs" onChange={handleChange} value={searchValue} />
       </form>
-      <p>{debouncedValue}</p>
       {loading && !error && <Spinner />}
       {!loading && error && <p>{error}</p>}
       {!loading && !error && (!foundGifs || (foundGifs && foundGifs.data.length === 0)) && (

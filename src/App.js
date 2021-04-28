@@ -16,11 +16,9 @@ function App() {
         <Container className="root-container">
           <Typography component="div" className="container">
             <Navbar />
-            <Container>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/trending" component={Trending} />
-              <Route exact path="/search" component={Search} />
-            </Container>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/trending" component={Trending} />
+            <Route exact path="/search" component={Search} />
           </Typography>
         </Container>
       </Router>

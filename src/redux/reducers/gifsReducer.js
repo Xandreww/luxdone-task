@@ -2,7 +2,7 @@ import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS } from "../actions/types";
 
 const initialState = {
   loading: false,
-  joke: null,
+  trendingGifs: null,
   error: "",
 };
 
@@ -11,7 +11,19 @@ export default function gifs(state = initialState, action) {
 
   switch (type) {
     case GET_TRENDING_GIFS:
-      return { ...state, trendingGifs: payload, loading: false };
+      console.log("state", state);
+      if (!state.allTrendingGifs) {
+        console.log("initial", state);
+        return { ...state, trendingGifs: payload, allTrendingGifs: payload.data, loading: false };
+      } else {
+        console.log("new", state);
+        return {
+          ...state,
+          trendingGifs: payload,
+          allTrendingGifs: [...state.allTrendingGifs, ...payload.data],
+          loading: false,
+        };
+      }
     case SEARCH_GIFS:
       return { ...state, foundGifs: payload, loading: false };
     case GIFS_ERROR:

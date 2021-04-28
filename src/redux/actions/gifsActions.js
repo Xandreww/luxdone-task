@@ -2,13 +2,15 @@ import axios from "axios";
 
 import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS } from "./types";
 const giphyApi = "https://api.giphy.com/v1/gifs/";
-const apiKey = process.env.REACT_APP_GIPHY_KEY;
+const api_key = process.env.REACT_APP_GIPHY_KEY;
 
-export const getTrendingGifs = () => async (dispatch) => {
+export const getTrendingGifs = (offset) => async (dispatch) => {
   try {
     const res = await axios.get(giphyApi + "trending", {
       params: {
-        api_key: apiKey,
+        api_key,
+        offset,
+        limit: 20,
       },
     });
 
@@ -28,7 +30,7 @@ export const searchGifs = (searchValue) => async (dispatch) => {
   try {
     const res = await axios.get(giphyApi + "search", {
       params: {
-        api_key: apiKey,
+        api_key,
         q: searchValue,
       },
     });
