@@ -19,6 +19,10 @@ const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, load
     getTrendingGifs(offset + count + 1);
   };
 
+  const openUrl = (url) => {
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="gifs">
       {!loading && error && <p>{error}</p>}
@@ -27,7 +31,7 @@ const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, load
         <>
           <PerPage />
           {allTrendingGifs.map((gif) => (
-            <div key={gif.id} className="gif">
+            <div key={gif.id} className="gif" onClick={() => openUrl(gif.url)}>
               <img src={gif.images.fixed_height.url} alt={gif.title} />
             </div>
           ))}

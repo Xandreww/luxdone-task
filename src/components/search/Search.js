@@ -30,9 +30,17 @@ const Search = ({ searchGifs, gifs: { foundGifs, loading, error } }) => {
     debouncedValue && searchGifs(debouncedValue);
   }, [debouncedValue, searchGifs]);
 
+  const openUrl = (url) => {
+    window.open(url, "_blank");
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
-      <form noValidate autoComplete="off">
+      <form noValidate autoComplete="off" onSubmit={onSubmit}>
         <TextField id="standard-basic" label="Search for gifs" onChange={handleChange} value={searchValue} />
       </form>
       {loading && !error && <Spinner />}
@@ -45,7 +53,7 @@ const Search = ({ searchGifs, gifs: { foundGifs, loading, error } }) => {
       {!loading && !error && foundGifs && foundGifs.data.length > 0 && (
         <div className="gifs">
           {foundGifs.data.map((gif) => (
-            <div key={gif.id} className="gif">
+            <div key={gif.id} className="gif" onClick={openUrl}>
               <img src={gif.images.fixed_height.url} alt={gif.title} />
             </div>
           ))}

@@ -4,4 +4,5 @@ export const JOKE_LOADING = "JOKE_LOADING";
 export const GET_TRENDING_GIFS = "GET_TRENDING_GIFS";
 export const SET_TRENING_GIFS_LIMIT = "SET_TRENING_GIFS_LIMIT";
 export const SEARCH_GIFS = "SEARCH_GIFS";
+export const GIFS_LOADING = "GIFS_LOADING";
 export const GIFS_ERROR = "GIFS_ERROR";

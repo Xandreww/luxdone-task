@@ -1,7 +1,7 @@
 import { GET_RANDOM_JOKE, JOKE_ERROR, JOKE_LOADING } from "../actions/types";
 
 const initialState = {
-  loading: true,
+  loading: false,
   joke: null,
   error: "",
 };

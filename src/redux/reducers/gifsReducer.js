@@ -16,6 +16,7 @@ export default function gifs(state = initialState, action) {
       return {
         ...state,
         limit: payload,
+        loading: false,
       };
     case GET_TRENDING_GIFS:
       return {
