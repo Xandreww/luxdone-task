@@ -5,6 +5,7 @@ import { searchGifs } from "../../redux/actions/gifsActions";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import Spinner from "../layout/spinner/Spinner";
+import PerPage from "../layout/perPage/PerPage";
 
 const Search = ({ searchGifs, gifs: { allFoundGifs, loading, error } }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -52,6 +53,7 @@ const Search = ({ searchGifs, gifs: { allFoundGifs, loading, error } }) => {
       )}
       {!loading && !error && allFoundGifs && allFoundGifs.length > 0 && (
         <div className="gifs">
+          <PerPage />
           {allFoundGifs.map((gif) => (
             <div key={gif.id} className="gif" onClick={openUrl}>
               <img src={gif.images.fixed_height.url} alt={gif.title} />
