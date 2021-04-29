@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import Spinner from "../layout/spinner/Spinner";
 
-const Search = ({ searchGifs, gifs: { foundGifs, loading, error } }) => {
+const Search = ({ searchGifs, gifs: { allFoundGifs, loading, error } }) => {
   const [searchValue, setSearchValue] = useState("");
   const [debouncedValue, setDebouncedValue] = useState("");
 
@@ -45,18 +45,19 @@ const Search = ({ searchGifs, gifs: { foundGifs, loading, error } }) => {
       </form>
       {loading && !error && <Spinner />}
       {!loading && error && <p>{error}</p>}
-      {!loading && !error && (!foundGifs || (foundGifs && foundGifs.data.length === 0)) && (
+      {!loading && !error && (!allFoundGifs || (allFoundGifs && allFoundGifs.length === 0)) && (
         <>
           <h2>Search for gif's</h2>
         </>
       )}
-      {!loading && !error && foundGifs && foundGifs.data.length > 0 && (
+      {!loading && !error && allFoundGifs && allFoundGifs.length > 0 && (
         <div className="gifs">
-          {foundGifs.data.map((gif) => (
+          {allFoundGifs.map((gif) => (
             <div key={gif.id} className="gif" onClick={openUrl}>
               <img src={gif.images.fixed_height.url} alt={gif.title} />
             </div>
           ))}
+          <button onClick={() => searchGifs(debouncedValue)}>Load more GIFs</button>
         </div>
       )}
     </>

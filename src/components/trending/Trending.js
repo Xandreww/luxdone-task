@@ -5,19 +5,12 @@ import PropTypes from "prop-types";
 import Spinner from "../layout/spinner/Spinner";
 import PerPage from "../layout/perPage/PerPage";
 
-const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, loading, error } }) => {
+const Trending = ({ getTrendingGifs, gifs: { allTrendingGifs, loading, error } }) => {
   useEffect(() => {
     if (!allTrendingGifs || (allTrendingGifs && allTrendingGifs.length === 0)) {
       getTrendingGifs();
     }
   }, [getTrendingGifs, allTrendingGifs]);
-
-  const getMoreGifs = () => {
-    const offset = trendingGifs.pagination.offset;
-    const count = trendingGifs.pagination.count;
-
-    getTrendingGifs(offset + count + 1);
-  };
 
   const openUrl = (url) => {
     window.open(url, "_blank");
@@ -35,7 +28,7 @@ const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, load
               <img src={gif.images.fixed_height.url} alt={gif.title} />
             </div>
           ))}
-          <button onClick={getMoreGifs}>Refresh trending GIFs</button>
+          <button onClick={() => getTrendingGifs()}>Load more GIFs</button>
         </>
       )}
     </div>

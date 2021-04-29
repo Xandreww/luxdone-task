@@ -1,6 +1,13 @@
 import axios from "axios";
 
-import { GET_TRENDING_GIFS, GIFS_ERROR, GIFS_LOADING, SEARCH_GIFS, SET_TRENING_GIFS_LIMIT } from "./types";
+import {
+  GET_TRENDING_GIFS,
+  GIFS_ERROR,
+  GIFS_LOADING,
+  SEARCH_GIFS,
+  SET_TRENING_GIFS_LIMIT,
+  CLEAR_SEARCH_RESULT,
+} from "./types";
 const giphyApi = "https://api.giphy.com/v1/gifs/";
 const api_key = process.env.REACT_APP_GIPHY_KEY;
 
@@ -11,12 +18,21 @@ export const setTrandingGifsLimit = (limit) => (dispatch) => {
   });
 };
 
-export const getTrendingGifs = (offset) => async (dispatch, getState) => {
+export const getTrendingGifs = () => async (dispatch, getState) => {
   const { gifs } = getState();
+
   let limit = 20;
+  let offset = 0;
+  let count = 0;
 
   if (gifs.limit) {
     limit = gifs.limit;
+  }
+
+  if (gifs.trendingGifs) {
+    const pagination = gifs.trendingGifs.pagination;
+    offset = pagination.offset;
+    count = pagination.count;
   }
 
   dispatch({
@@ -27,7 +43,7 @@ export const getTrendingGifs = (offset) => async (dispatch, getState) => {
     const res = await axios.get(giphyApi + "trending", {
       params: {
         api_key,
-        offset,
+        offset: offset + count + 1,
         limit,
       },
     });
@@ -44,7 +60,36 @@ export const getTrendingGifs = (offset) => async (dispatch, getState) => {
   }
 };
 
-export const searchGifs = (searchValue) => async (dispatch) => {
+export const searchGifs = (searchValue) => async (dispatch, getState) => {
+  const { gifs } = getState();
+
+  let limit = 20;
+  let offset = 0;
+  let count = 0;
+  let oldSearchValue = "";
+
+  if (gifs.limit) {
+    limit = gifs.limit;
+  }
+
+  if (gifs.foundGifs) {
+    const pagination = gifs.foundGifs.pagination;
+    offset = pagination.offset;
+    count = pagination.count;
+  }
+
+  if (gifs.searchValue) {
+    oldSearchValue = gifs.searchValue;
+
+    if (oldSearchValue !== searchValue) {
+      console.log("search value changed");
+
+      dispatch({
+        type: CLEAR_SEARCH_RESULT,
+      });
+    }
+  }
+
   dispatch({
     type: GIFS_LOADING,
   });
@@ -54,12 +99,19 @@ export const searchGifs = (searchValue) => async (dispatch) => {
       params: {
         api_key,
         q: searchValue,
+        offset: offset + count + 1,
+        limit,
       },
     });
 
+    const payload = {
+      data: res.data,
+      searchValue,
+    };
+
     dispatch({
       type: SEARCH_GIFS,
-      payload: res.data,
+      payload,
     });
   } catch (err) {
     dispatch({
