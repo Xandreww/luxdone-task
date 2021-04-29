@@ -1,29 +1,29 @@
-import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS } from "../actions/types";
+import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS, SET_TRENING_GIFS_LIMIT } from "../actions/types";
 
 const initialState = {
   loading: false,
   trendingGifs: null,
   error: "",
+  allTrendingGifs: [],
+  limit: null,
 };
 
 export default function gifs(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case SET_TRENING_GIFS_LIMIT:
+      return {
+        ...state,
+        limit: payload,
+      };
     case GET_TRENDING_GIFS:
-      console.log("state", state);
-      if (!state.allTrendingGifs) {
-        console.log("initial", state);
-        return { ...state, trendingGifs: payload, allTrendingGifs: payload.data, loading: false };
-      } else {
-        console.log("new", state);
-        return {
-          ...state,
-          trendingGifs: payload,
-          allTrendingGifs: [...state.allTrendingGifs, ...payload.data],
-          loading: false,
-        };
-      }
+      return {
+        ...state,
+        trendingGifs: payload,
+        allTrendingGifs: [...state.allTrendingGifs, ...payload.data],
+        loading: false,
+      };
     case SEARCH_GIFS:
       return { ...state, foundGifs: payload, loading: false };
     case GIFS_ERROR:

@@ -1,16 +1,30 @@
 import axios from "axios";
 
-import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS } from "./types";
+import { GET_TRENDING_GIFS, GIFS_ERROR, SEARCH_GIFS, SET_TRENING_GIFS_LIMIT } from "./types";
 const giphyApi = "https://api.giphy.com/v1/gifs/";
 const api_key = process.env.REACT_APP_GIPHY_KEY;
 
-export const getTrendingGifs = (offset) => async (dispatch) => {
+export const setTrandingGifsLimit = (limit) => (dispatch) => {
+  dispatch({
+    type: SET_TRENING_GIFS_LIMIT,
+    payload: limit,
+  });
+};
+
+export const getTrendingGifs = (offset) => async (dispatch, getState) => {
+  const { gifs } = getState();
+  let limit = 20;
+
+  if (gifs.limit) {
+    limit = gifs.limit;
+  }
+
   try {
     const res = await axios.get(giphyApi + "trending", {
       params: {
         api_key,
         offset,
-        limit: 20,
+        limit,
       },
     });
 

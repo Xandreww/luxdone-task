@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getTrendingGifs } from "../../redux/actions/gifsActions";
 import PropTypes from "prop-types";
 import Spinner from "../layout/spinner/Spinner";
+import PerPage from "../layout/perPage/PerPage";
 
 const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, loading, error } }) => {
   useEffect(() => {
@@ -15,7 +16,7 @@ const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, load
     const offset = trendingGifs.pagination.offset;
     const count = trendingGifs.pagination.count;
 
-    getTrendingGifs(offset + count);
+    getTrendingGifs(offset + count + 1);
   };
 
   return (
@@ -24,6 +25,7 @@ const Trending = ({ getTrendingGifs, gifs: { trendingGifs, allTrendingGifs, load
       {loading && !error && <Spinner />}
       {!loading && !error && allTrendingGifs && allTrendingGifs.length > 0 && (
         <>
+          <PerPage />
           {allTrendingGifs.map((gif) => (
             <div key={gif.id} className="gif">
               <img src={gif.images.fixed_height.url} alt={gif.title} />
