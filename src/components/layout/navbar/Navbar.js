@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import SearchIcon from "@material-ui/icons/Search";
+import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
 import giphy from "../../../assets/giphy.png";
 import React from "react";
 import styles from "./Navbar.module.scss";
@@ -24,6 +25,10 @@ const Navbar = () => {
             <Link className={styles.navItem} to="search">
               <SearchIcon />
               Search
+            </Link>
+            <Link className={styles.navItem} to="jokes">
+              <SentimentVerySatisfiedIcon />
+              Jokes
             </Link>
           </div>
           <div className={styles.right}>

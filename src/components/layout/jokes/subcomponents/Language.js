@@ -7,8 +7,6 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
-import { setTrandingGifsLimit } from "../../../redux/actions/gifsActions";
-import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PerPage = ({ setTrandingGifsLimit }) => {
+const Language = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -29,7 +27,6 @@ const PerPage = ({ setTrandingGifsLimit }) => {
   };
 
   const onClick = (e) => {
-    setTrandingGifsLimit(+e.target.textContent);
     setOpen(false);
   };
 
@@ -59,7 +56,7 @@ const PerPage = ({ setTrandingGifsLimit }) => {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          Items per load
+          Language
         </Button>
         <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-start">
           {({ TransitionProps }) => (
@@ -67,9 +64,12 @@ const PerPage = ({ setTrandingGifsLimit }) => {
               <Paper>
                 <ClickAwayListener onClickAway={() => setOpen(false)}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={onClick}>10</MenuItem>
-                    <MenuItem onClick={onClick}>20</MenuItem>
-                    <MenuItem onClick={onClick}>40</MenuItem>
+                    <MenuItem onClick={onClick}>cs - Czech</MenuItem>
+                    <MenuItem onClick={onClick}>de - German</MenuItem>
+                    <MenuItem onClick={onClick}>en - English</MenuItem>
+                    <MenuItem onClick={onClick}>es - Spanish</MenuItem>
+                    <MenuItem onClick={onClick}>fr - French</MenuItem>
+                    <MenuItem onClick={onClick}>pt - Portuguese</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -81,4 +81,4 @@ const PerPage = ({ setTrandingGifsLimit }) => {
   );
 };
 
-export default connect(null, { setTrandingGifsLimit })(PerPage);
+export default Language;

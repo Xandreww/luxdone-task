@@ -7,6 +7,7 @@ import Search from "./components/search/Search";
 import Trending from "./components/trending/Trending";
 import store from "./redux/store";
 import "./App.scss";
+import Jokes from "./components/layout/jokes/Jokes";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/trending" component={Trending} />
             <Route exact path="/search" component={Search} />
+            <Route exact path="/jokes" component={Jokes} />
           </Typography>
         </Container>
       </Router>

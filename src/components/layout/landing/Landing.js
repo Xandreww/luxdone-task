@@ -1,33 +1,33 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getRandomJoke } from "../../../redux/actions/jokeActions";
+import { getRandomJoke } from "../../../redux/actions/jokesActions";
 import PropTypes from "prop-types";
 import Spinner from "../spinner/Spinner";
 import styles from "./Landing.module.scss";
 
-const Landing = ({ getRandomJoke, joke: { joke, loading, error } }) => {
+const Landing = ({ getRandomJoke, jokes: { randomJoke, loading, error } }) => {
   useEffect(() => {
-    if (!joke || (joke && !joke.id)) {
+    if (!randomJoke || (randomJoke && !randomJoke.id)) {
       getRandomJoke();
     }
-  }, [getRandomJoke, joke]);
+  }, [getRandomJoke, randomJoke]);
 
   const copyJokeToClipboard = () => {
-    navigator.clipboard.writeText(joke.setup + "\n" + joke.punchline);
+    navigator.clipboard.writeText(randomJoke.setup + "\n" + randomJoke.punchline);
   };
 
   return (
     <>
       {!loading && error && <p>{error}</p>}
       {loading && !error && <Spinner />}
-      {!loading && !error && joke && (
+      {!loading && !error && randomJoke && (
         <>
           <h1>Trending</h1>
-          <div className={styles.joke} onClick={copyJokeToClipboard}>
-            <p>{joke.setup}</p>
-            <p>{joke.punchline}</p>
+          <div className={styles.randomJoke} onClick={copyJokeToClipboard}>
+            <p>{randomJoke.setup}</p>
+            <p>{randomJoke.punchline}</p>
           </div>
-          <button onClick={() => getRandomJoke()}>Gimme another joke!</button>
+          <button onClick={() => getRandomJoke()}>Gimme another randomJoke!</button>
         </>
       )}
     </>
@@ -35,12 +35,12 @@ const Landing = ({ getRandomJoke, joke: { joke, loading, error } }) => {
 };
 
 const mapStateToProps = (state) => ({
-  joke: state.joke,
+  jokes: state.jokes,
 });
 
 Landing.propTypes = {
   getRandomJoke: PropTypes.func.isRequired,
-  joke: PropTypes.object,
+  jokes: PropTypes.object,
 };
 
 export default connect(mapStateToProps, { getRandomJoke })(Landing);

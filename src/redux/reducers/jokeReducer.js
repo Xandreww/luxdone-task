@@ -1,8 +1,9 @@
-import { GET_RANDOM_JOKE, JOKE_ERROR, JOKE_LOADING } from "../actions/types";
+import { GET_JOKES, GET_RANDOM_JOKE, JOKE_ERROR, JOKE_LOADING } from "../actions/types";
 
 const initialState = {
   loading: false,
-  joke: null,
+  randomJoke: null,
+  jokesData: null,
   error: "",
 };
 
@@ -11,7 +12,9 @@ export default function joke(state = initialState, action) {
 
   switch (type) {
     case GET_RANDOM_JOKE:
-      return { ...state, joke: payload, loading: false };
+      return { ...state, randomJoke: payload, loading: false };
+    case GET_JOKES:
+      return { ...state, jokesData: payload, loading: false };
     case JOKE_LOADING:
       return { ...state, loading: true };
     case JOKE_ERROR:

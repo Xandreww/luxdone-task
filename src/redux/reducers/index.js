@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import joke from "./jokeReducer";
+import jokes from "./jokeReducer";
 import gifs from "./gifsReducer";
 
-export default combineReducers({ joke, gifs });
+export default combineReducers({ jokes, gifs });
