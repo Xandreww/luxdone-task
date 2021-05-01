@@ -1,5 +1,6 @@
 export const GET_RANDOM_JOKE = "GET_RANDOM_JOKE";
 export const GET_JOKES = "GET_JOKES";
+export const SET_JOKES_AMOUNT = "SET_JOKES_AMOUNT";
 export const JOKE_ERROR = "JOKE_ERROR";
 export const JOKE_LOADING = "JOKE_LOADING";
 export const GET_TRENDING_GIFS = "GET_TRENDING_GIFS";

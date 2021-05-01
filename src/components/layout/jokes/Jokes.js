@@ -5,6 +5,7 @@ import JokeCategory from "./subcomponents/JokeCategory";
 import Language from "./subcomponents/Language";
 import PropTypes from "prop-types";
 import Spinner from "../spinner/Spinner";
+import AmountOfJokes from "./subcomponents/AmountOfJokes";
 
 const Jokes = ({ getJokes, jokes: { jokesData, loading, error } }) => {
   const fetchJokes = () => {
@@ -16,17 +17,34 @@ const Jokes = ({ getJokes, jokes: { jokesData, loading, error } }) => {
       <h1>Jokes!</h1>
       <JokeCategory />
       <Language />
+      <AmountOfJokes />
 
       <>
         {!loading && error && <p>{error}</p>}
         {loading && !error && <Spinner />}
-        {!loading && !error && jokesData && jokesData.jokes.length > 0 && (
+        {!loading && !error && jokesData && !jokesData.jokes && (
+          <>
+            {jokesData.setup && jokesData.delivery && (
+              <>
+                <p>{jokesData.setup}</p>
+                <p>{jokesData.delivery}</p>
+              </>
+            )}
+            {jokesData.joke && <p>{jokesData.joke}</p>}
+          </>
+        )}
+        {!loading && !error && jokesData && jokesData.jokes && jokesData.jokes.length > 0 && (
           <>
             {jokesData.jokes.map((joke) => (
-              <div key={joke.id}>
-                <p>{joke.setup}</p>
-                <p>{joke.delivery}</p>
-              </div>
+              <>
+                {joke.setup && joke.delivery && (
+                  <div key={joke.id}>
+                    <p>{joke.setup}</p>
+                    <p>{joke.delivery}</p>
+                  </div>
+                )}
+                {joke.joke && <p>{joke.joke}</p>}
+              </>
             ))}
           </>
         )}
