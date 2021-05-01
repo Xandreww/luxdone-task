@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_RANDOM_JOKE, JOKE_LOADING, JOKE_ERROR, GET_JOKES, SET_JOKES_AMOUNT } from "./types";
+import { GET_RANDOM_JOKE, JOKE_LOADING, JOKE_ERROR, GET_JOKES, SET_JOKES_AMOUNT, SET_JOKES_CATEGORY } from "./types";
 
 export const getRandomJoke = () => async (dispatch) => {
   try {
@@ -79,5 +79,12 @@ export const setJokesAmount = (amount) => (dispatch) => {
   dispatch({
     type: SET_JOKES_AMOUNT,
     payload: amount,
+  });
+};
+
+export const setJokesCategory = (categories) => (dispatch) => {
+  dispatch({
+    type: SET_JOKES_CATEGORY,
+    payload: categories,
   });
 };

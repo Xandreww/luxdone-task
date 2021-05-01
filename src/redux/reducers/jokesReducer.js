@@ -1,4 +1,11 @@
-import { GET_JOKES, GET_RANDOM_JOKE, JOKE_ERROR, JOKE_LOADING, SET_JOKES_AMOUNT } from "../actions/types";
+import {
+  GET_JOKES,
+  GET_RANDOM_JOKE,
+  JOKE_ERROR,
+  JOKE_LOADING,
+  SET_JOKES_AMOUNT,
+  SET_JOKES_CATEGORY,
+} from "../actions/types";
 
 const initialState = {
   loading: false,
@@ -46,6 +53,11 @@ export default function joke(state = initialState, action) {
       return {
         ...state,
         jokesParams: { ...state.jokesParams, amount: payload },
+      };
+    case SET_JOKES_CATEGORY:
+      return {
+        ...state,
+        jokesParams: { ...state.jokesParams, category: payload },
       };
     case JOKE_LOADING:
       return { ...state, loading: true };

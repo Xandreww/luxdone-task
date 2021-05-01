@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { setJokesCategory } from "../../../../redux/actions/jokesActions";
 
-const JokeCategory = () => {
+const JokeCategory = ({ setJokesCategory }) => {
   const [any, setAny] = useState(true);
   const [state, setState] = useState({
     Programming: false,
@@ -32,6 +35,10 @@ const JokeCategory = () => {
     }
     setAny(!any);
   };
+
+  useEffect(() => {
+    setJokesCategory(state);
+  }, [state, setJokesCategory]);
 
   return (
     <>
@@ -97,4 +104,8 @@ const JokeCategory = () => {
   );
 };
 
-export default JokeCategory;
+JokeCategory.propTypes = {
+  setJokesCategory: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setJokesCategory })(JokeCategory);
