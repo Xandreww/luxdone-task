@@ -12,7 +12,6 @@ const JokeCategory = ({ setJokesCategory, jokes: { jokesParams } }) => {
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
-    console.log(state);
   };
 
   const handleAnyChange = () => {
@@ -37,19 +36,17 @@ const JokeCategory = ({ setJokesCategory, jokes: { jokesParams } }) => {
 
   useEffect(() => {
     setJokesCategory(state);
-  }, [state, setJokesCategory]);
 
-  useEffect(() => {
-    setState(jokesParams.category);
-  }, [jokesParams]);
-
-  useEffect(() => {
     if (allFalse(state)) {
       setAny(false);
     } else {
       setAny(true);
     }
-  }, [state]);
+  }, [state, setJokesCategory]);
+
+  useEffect(() => {
+    setState(jokesParams.category);
+  }, [jokesParams.category]);
 
   return (
     <>

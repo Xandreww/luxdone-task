@@ -1,6 +1,14 @@
 import axios from "axios";
 
-import { GET_RANDOM_JOKE, JOKE_LOADING, JOKE_ERROR, GET_JOKES, SET_JOKES_AMOUNT, SET_JOKES_CATEGORY } from "./types";
+import {
+  GET_RANDOM_JOKE,
+  JOKE_LOADING,
+  JOKE_ERROR,
+  GET_JOKES,
+  SET_JOKES_AMOUNT,
+  SET_JOKES_CATEGORY,
+  SET_JOKES_LANGUAGE,
+} from "./types";
 
 export const getRandomJoke = () => async (dispatch) => {
   try {
@@ -28,10 +36,10 @@ export const getJokes = () => async (dispatch, getState) => {
   const state = getState();
   const jokesParams = state.jokes.jokesParams;
 
-  const setCategory = (object) => {
-    for (let o in object) {
-      if (object[o]) {
-        categoryArray.push(o);
+  const setCategory = (categories) => {
+    for (let category in categories) {
+      if (categories[category]) {
+        categoryArray.push(category);
       }
     }
     if (categoryArray.length > 0) {
@@ -45,15 +53,19 @@ export const getJokes = () => async (dispatch, getState) => {
     }
   };
 
+  const setLang = (languages) => {
+    if (!jokesParams.lang.en) {
+      for (let language in languages) {
+        if (languages[language]) {
+          params.lang = language;
+        }
+      }
+    }
+  };
+
   setAmount(jokesParams.amount);
   setCategory(jokesParams.category);
-
-  // const isTrue = object => {
-  //   for (let o in object) {
-  //     if (!object[o]) return false
-  //   }
-  //   return true
-  // }
+  setLang(jokesParams.lang);
 
   try {
     dispatch({
@@ -86,5 +98,12 @@ export const setJokesCategory = (categories) => (dispatch) => {
   dispatch({
     type: SET_JOKES_CATEGORY,
     payload: categories,
+  });
+};
+
+export const setJokesLanguage = (languages) => (dispatch) => {
+  dispatch({
+    type: SET_JOKES_LANGUAGE,
+    payload: languages,
   });
 };

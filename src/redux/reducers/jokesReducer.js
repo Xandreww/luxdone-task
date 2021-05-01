@@ -5,6 +5,7 @@ import {
   JOKE_LOADING,
   SET_JOKES_AMOUNT,
   SET_JOKES_CATEGORY,
+  SET_JOKES_LANGUAGE,
 } from "../actions/types";
 
 const initialState = {
@@ -24,7 +25,7 @@ const initialState = {
     lang: {
       cs: false,
       de: false,
-      en: false,
+      en: true,
       es: false,
       fr: false,
       pt: false,
@@ -58,6 +59,11 @@ export default function joke(state = initialState, action) {
       return {
         ...state,
         jokesParams: { ...state.jokesParams, category: payload },
+      };
+    case SET_JOKES_LANGUAGE:
+      return {
+        ...state,
+        jokesParams: { ...state.jokesParams, lang: payload },
       };
     case JOKE_LOADING:
       return { ...state, loading: true };
