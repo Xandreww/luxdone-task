@@ -6,16 +6,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setJokesCategory } from "../../../../redux/actions/jokesActions";
 
-const JokeCategory = ({ setJokesCategory }) => {
-  const [any, setAny] = useState(true);
-  const [state, setState] = useState({
-    Programming: false,
-    Miscellaneous: false,
-    Dark: false,
-    Pun: false,
-    Spooky: false,
-    Christmas: false,
-  });
+const JokeCategory = ({ setJokesCategory, jokes: { jokesParams } }) => {
+  const [any, setAny] = useState();
+  const [state, setState] = useState();
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -36,76 +29,107 @@ const JokeCategory = ({ setJokesCategory }) => {
     setAny(!any);
   };
 
+  const allFalse = (obj) => {
+    for (let o in obj) if (obj[o]) return true;
+
+    return false;
+  };
+
   useEffect(() => {
     setJokesCategory(state);
   }, [state, setJokesCategory]);
 
+  useEffect(() => {
+    setState(jokesParams.category);
+  }, [jokesParams]);
+
+  useEffect(() => {
+    if (allFalse(state)) {
+      setAny(false);
+    } else {
+      setAny(true);
+    }
+  }, [state]);
+
   return (
     <>
-      <h2>Select category: </h2>
+      {state && (
+        <>
+          <h2>Select category: </h2>
 
-      <FormGroup row>
-        <FormControlLabel
-          control={<Checkbox checked={any} onChange={handleAnyChange} name="Any" color="primary" />}
-          label="Any"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.Programming}
-              disabled={any}
-              onChange={handleChange}
-              name="Programming"
-              color="primary"
+          <FormGroup row>
+            <FormControlLabel
+              control={<Checkbox checked={any} onChange={handleAnyChange} name="Any" color="primary" />}
+              label="Any"
             />
-          }
-          label="Programming"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.Miscellaneous}
-              disabled={any}
-              onChange={handleChange}
-              name="Miscellaneous"
-              color="primary"
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.Programming}
+                  disabled={any}
+                  onChange={handleChange}
+                  name="Programming"
+                  color="primary"
+                />
+              }
+              label="Programming"
             />
-          }
-          label="Miscellaneous"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={state.Dark} disabled={any} onChange={handleChange} name="Dark" color="primary" />}
-          label="Dark"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={state.Pun} disabled={any} onChange={handleChange} name="Pun" color="primary" />}
-          label="Pun"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox checked={state.Spooky} disabled={any} onChange={handleChange} name="Spooky" color="primary" />
-          }
-          label="Spooky"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.Christmas}
-              disabled={any}
-              onChange={handleChange}
-              name="Christmas"
-              color="primary"
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.Miscellaneous}
+                  disabled={any}
+                  onChange={handleChange}
+                  name="Miscellaneous"
+                  color="primary"
+                />
+              }
+              label="Miscellaneous"
             />
-          }
-          label="Christmas"
-        />
-      </FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox checked={state.Dark} disabled={any} onChange={handleChange} name="Dark" color="primary" />
+              }
+              label="Dark"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox checked={state.Pun} disabled={any} onChange={handleChange} name="Pun" color="primary" />
+              }
+              label="Pun"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox checked={state.Spooky} disabled={any} onChange={handleChange} name="Spooky" color="primary" />
+              }
+              label="Spooky"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.Christmas}
+                  disabled={any}
+                  onChange={handleChange}
+                  name="Christmas"
+                  color="primary"
+                />
+              }
+              label="Christmas"
+            />
+          </FormGroup>
+        </>
+      )}
     </>
   );
 };
 
+const mapStateToProps = (state) => ({
+  jokes: state.jokes,
+});
+
 JokeCategory.propTypes = {
   setJokesCategory: PropTypes.func.isRequired,
+  jokes: PropTypes.object,
 };
 
-export default connect(null, { setJokesCategory })(JokeCategory);
+export default connect(mapStateToProps, { setJokesCategory })(JokeCategory);
