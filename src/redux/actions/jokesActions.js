@@ -8,6 +8,7 @@ import {
   SET_JOKES_AMOUNT,
   SET_JOKES_CATEGORY,
   SET_JOKES_LANGUAGE,
+  SET_JOKES_BLACKLIST_FLAGS,
 } from "./types";
 
 export const getRandomJoke = () => async (dispatch) => {
@@ -33,6 +34,7 @@ export const getJokes = () => async (dispatch, getState) => {
   let categories = "Any";
   const params = {};
   const categoryArray = [];
+  const blacklistFlagsArray = [];
   const state = getState();
   const jokesParams = state.jokes.jokesParams;
 
@@ -63,9 +65,20 @@ export const getJokes = () => async (dispatch, getState) => {
     }
   };
 
+  const setBlacklistFlags = (blacklistFlags) => {
+    for (let flag in blacklistFlags) {
+      if (blacklistFlags[flag]) {
+        blacklistFlagsArray.push(flag);
+      }
+    }
+
+    params.blacklistFlags = blacklistFlagsArray.join(",");
+  };
+
   setAmount(jokesParams.amount);
   setCategory(jokesParams.category);
   setLang(jokesParams.lang);
+  setBlacklistFlags(jokesParams.blacklistFlags);
 
   try {
     dispatch({
@@ -105,5 +118,12 @@ export const setJokesLanguage = (languages) => (dispatch) => {
   dispatch({
     type: SET_JOKES_LANGUAGE,
     payload: languages,
+  });
+};
+
+export const setJokesBlacklistFlags = (blacklistFlags) => (dispatch) => {
+  dispatch({
+    type: SET_JOKES_BLACKLIST_FLAGS,
+    payload: blacklistFlags,
   });
 };

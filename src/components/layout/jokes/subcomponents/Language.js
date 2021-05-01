@@ -42,7 +42,6 @@ const Language = ({ setJokesLanguage, jokes: { jokesParams } }) => {
       }
     }
 
-    console.log("languages", languages);
     setJokesLanguage(languages);
   };
 

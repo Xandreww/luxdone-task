@@ -6,6 +6,7 @@ import Language from "./subcomponents/Language";
 import PropTypes from "prop-types";
 import Spinner from "../spinner/Spinner";
 import AmountOfJokes from "./subcomponents/AmountOfJokes";
+import BlacklistCategory from "./subcomponents/BlacklistCategory";
 
 const Jokes = ({ getJokes, jokes: { jokesData, loading, error } }) => {
   const fetchJokes = () => {
@@ -18,6 +19,7 @@ const Jokes = ({ getJokes, jokes: { jokesData, loading, error } }) => {
       <JokeCategory />
       <Language />
       <AmountOfJokes />
+      <BlacklistCategory />
 
       <>
         {!loading && error && <p>{error}</p>}
