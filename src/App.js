@@ -1,5 +1,5 @@
 import { Container, CssBaseline, Typography } from "@material-ui/core";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import Landing from "./components/layout/landing/Landing";
 import Navbar from "./components/layout/navbar/Navbar";
@@ -21,6 +21,9 @@ function App() {
             <Route exact path="/trending" component={Trending} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/jokes" component={Jokes} />
+            <Route exact path="/luxdone-task">
+              <Redirect to="/" />
+            </Route>
           </Typography>
         </Container>
       </Router>
