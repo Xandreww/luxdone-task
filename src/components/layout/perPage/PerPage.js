@@ -13,6 +13,10 @@ import { connect } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    position: "absolute",
+    top: "80px",
+    left: 0,
+    width: "130px",
   },
   paper: {
     marginRight: theme.spacing(2),
@@ -58,6 +62,8 @@ const PerPage = ({ setTrandingGifsLimit }) => {
           aria-controls={open ? "menu-list-grow" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
+          variant="contained"
+          color="primary"
         >
           Items per load
         </Button>

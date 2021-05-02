@@ -8,32 +8,36 @@ import giphy from "../../../assets/giphy.png";
 import React from "react";
 import styles from "./Navbar.module.scss";
 
+const goToGiphy = () => {
+  window.open("https://giphy.com/", "_blank");
+};
+
 const Navbar = () => {
   return (
-    <AppBar position="static">
+    <AppBar className={styles.appBar} position="static">
       <Container>
         <Toolbar className={styles.navbar} variant="dense">
           <div className={styles.left}>
             <Link className={styles.navItem} to="/">
-              <HomeIcon />
-              Home
+              <HomeIcon className={styles.navIcon} />
+              <span className="rainbowText">Home</span>
             </Link>
             <Link className={styles.navItem} to="/trending">
-              <TrendingUpIcon />
-              Trending
+              <TrendingUpIcon className={styles.navIcon} />
+              <span className="rainbowText">Trending</span>
             </Link>
             <Link className={styles.navItem} to="search">
-              <SearchIcon />
-              Search
+              <SearchIcon className={styles.navIcon} />
+              <span className="rainbowText">Search</span>
             </Link>
             <Link className={styles.navItem} to="jokes">
-              <SentimentVerySatisfiedIcon />
-              Jokes
+              <SentimentVerySatisfiedIcon className={styles.navIcon} />
+              <span className="rainbowText">Jokes</span>
             </Link>
           </div>
           <div className={styles.right}>
             <span>Powered by: </span>
-            <img src={giphy} alt="Giphy's Logo" />
+            <img src={giphy} alt="Giphy's Logo" onClick={goToGiphy} />
           </div>
         </Toolbar>
       </Container>

@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getTrendingGifs } from "../../redux/actions/gifsActions";
+import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import Spinner from "../layout/spinner/Spinner";
 import PerPage from "../layout/perPage/PerPage";
+import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
 
 const Trending = ({ getTrendingGifs, gifs: { allTrendingGifs, loading, error } }) => {
   useEffect(() => {
@@ -28,7 +30,11 @@ const Trending = ({ getTrendingGifs, gifs: { allTrendingGifs, loading, error } }
               <img src={gif.images.fixed_height.url} alt={gif.title} />
             </div>
           ))}
-          <button onClick={() => getTrendingGifs()}>Load more GIFs</button>
+          <div className="button-bottom">
+            <Button onClick={() => getTrendingGifs()} variant="contained" color="primary">
+              <SentimentVerySatisfiedIcon className="mr" /> Load more GIFs
+            </Button>
+          </div>
         </>
       )}
     </div>

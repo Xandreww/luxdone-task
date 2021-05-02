@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #1976d2;
+}
+
+.appBar {
+  background-color: #1976d2;
 }
 
 .left,
@@ -10,11 +15,18 @@
   align-items: center;
 }
 
-.right span {
-  margin-right: 20px;
-  font-size: 20px;
-  color: black;
-  font-weight: 700;
+.right {
+  span {
+    margin-right: 20px;
+    font-size: 20px;
+    color: seashell;
+    font-weight: 700;
+    cursor: default;
+  }
+
+  img {
+    cursor: pointer;
+  }
 }
 
 .navItem {
@@ -25,7 +37,8 @@
   letter-spacing: 0.0075em;
   display: flex;
   align-items: center;
-  color: black;
+  color: seashell;
+  text-decoration: none;
 
   &:first-of-type {
     margin-left: 0;
@@ -34,4 +47,8 @@
   &:last-of-type {
     margin-right: 0;
   }
+}
+
+.navIcon {
+  margin-right: 5px;
 }

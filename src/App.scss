@@ -24,6 +24,7 @@ body {
 
 .gifs {
   margin: 0 auto;
+  padding: 40px 0;
   width: 80%;
   display: flex;
   flex-wrap: wrap;
@@ -33,4 +34,66 @@ body {
 .gif {
   padding: 0 2px;
   cursor: pointer;
+}
+
+.button-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.mr {
+  margin-right: 5px;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #1976d2 !important;
+}
+
+.rainbowText {
+  background: linear-gradient(to right, crimson, pink, springgreen);
+  background-size: 200% 200%;
+  animation: rainbow 2s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0);
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.joke {
+  border: 4px solid magenta;
+  padding: 10px 40px;
+  cursor: pointer;
+  width: fit-content;
+  border-radius: 10px;
+  margin-bottom: 20px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
 }
