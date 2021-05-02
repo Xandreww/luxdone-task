@@ -21,9 +21,7 @@ function App() {
             <Route exact path="/trending" component={Trending} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/jokes" component={Jokes} />
-            <Route exact path="/luxdone-task">
-              <Redirect to="/" />
-            </Route>
+            <Redirect from="*" to="/" />
           </Typography>
         </Container>
       </Router>
