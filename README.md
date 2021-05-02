@@ -11,6 +11,10 @@ On this page you can check out trending GIF's, search for GIF's and search for r
 
 You can run the app locally after fetching it from repository, installing dependencies `npm install` and running start script `npm start`.
 
+## Hosting
+
+The page is deployed at [https://xandreww.github.io/luxdone-task/]
+
 ## Used APIs
 
 Giphy API - [https://developers.giphy.com/]<br />
