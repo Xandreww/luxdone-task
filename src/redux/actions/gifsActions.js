@@ -82,8 +82,6 @@ export const searchGifs = (searchValue) => async (dispatch, getState) => {
     oldSearchValue = gifs.searchValue;
 
     if (oldSearchValue !== searchValue) {
-      console.log("search value changed");
-
       dispatch({
         type: CLEAR_SEARCH_RESULT,
       });
