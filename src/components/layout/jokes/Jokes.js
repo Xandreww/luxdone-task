@@ -2,14 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { getJokes } from "../../../redux/actions/jokesActions";
 import { Button, Container } from "@material-ui/core";
-import JokeCategory from "./subcomponents/JokeCategory";
-import Language from "./subcomponents/Language";
 import PropTypes from "prop-types";
 import Spinner from "../spinner/Spinner";
-import AmountOfJokes from "./subcomponents/AmountOfJokes";
-import BlacklistCategory from "./subcomponents/BlacklistCategory";
 import styles from "./Jokes.module.scss";
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
+import SettingsAccordion from "./subcomponents/SettingsAccordion";
 
 const Jokes = ({ getJokes, jokes: { jokesData, loading, error } }) => {
   const copyJokeToClipboard = (joke) => {
@@ -26,18 +23,7 @@ const Jokes = ({ getJokes, jokes: { jokesData, loading, error } }) => {
     <Container className="jokes">
       <h1>Random jokes!</h1>
       <p>Here, you can search for random jokes and apply filters for specyfic results (optional)</p>
-      <div className={styles.settings}>
-        <div className={styles.categories}>
-          <JokeCategory />
-          <BlacklistCategory />
-        </div>
-        <div className={styles.rightSideDropdowns}>
-          <div className={styles.jokeLanguage}>
-            <Language />
-          </div>
-          <AmountOfJokes />
-        </div>
-      </div>
+      <SettingsAccordion />
 
       <>
         {!loading && error && <p>{error}</p>}
